@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 import connectToMongoDB from './database/mongoDB.js'
+import userRoutes from './routes/user.routes.js'
 
 configDotenv()
 
@@ -21,6 +22,8 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+
+app.use('/api/user', userRoutes)
 
 app.listen(port, () => {
 	connectToMongoDB()
