@@ -1,8 +1,8 @@
 import express from 'express'
 
-import { registerUserInput, loginUserInput } from '../middlewares/user.auth'
+import { registerUserInput, loginUserInput } from '../middlewares/user.auth.js'
 
-import { registerUser, loginUser } from '../controllers/user.controller'
+import { registerUser, loginUser } from '../controllers/user.controller.js'
 
 const router = express.Router()
 
