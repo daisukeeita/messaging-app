@@ -2,6 +2,8 @@ import { useContext, useState } from 'react'
 import RegisterInputComponent from '../components/registerComponents/registerInputComponent.jsx'
 import GenderRadioBtn from '../components/registerComponents/registerInputRadio.jsx'
 import { GenderContext } from '../contexts/RegisterGenderContext.jsx'
+import useRegister from '../hooks/registerHooks/useRegister.js'
+import { useNavigate } from 'react-router-dom'
 
 const initialValue = {
 	fullName: '',
@@ -11,7 +13,9 @@ const initialValue = {
 }
 
 const Register = () => {
+	const navigate = useNavigate()
 	const [inputValues, setInputValues] = useState(initialValue)
+	const { loading, register } = useRegister()
 	const { genderValue } = useContext(GenderContext)
 
 	const handleUserInputs = e => {
@@ -27,15 +31,16 @@ const Register = () => {
 		setInputValues(initialValue)
 	}
 
+	const navigateTo = data => {
+		console.log(data.status)
+		if (data.status) {
+			return navigate('/login', { replace: true })
+		}
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
-		console.log({
-			fullName: inputValues.fullName,
-			username: inputValues.username,
-			password: inputValues.password,
-			confirmPassword: inputValues.password,
-			gender: genderValue
-		})
+		register(inputValues, genderValue).then(data => navigateTo(data))
 		resetStateValue()
 	}
 
@@ -86,7 +91,13 @@ const Register = () => {
 					<GenderRadioBtn />
 
 					<div className="mt-5">
-						<button className="btn btn-error w-full">Register Account</button>
+						<button className="btn btn-error w-full">
+							{loading ? (
+								<span className="loading loading-ring loading-xs"></span>
+							) : (
+								'Register Account'
+							)}
+						</button>
 					</div>
 				</form>
 			</div>
