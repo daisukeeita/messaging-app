@@ -1,3 +1,4 @@
+import ChatPage from './pages/chatPage.jsx'
 import Login from './pages/loginPage.jsx'
 import Register from './pages/registerPage.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -7,6 +8,7 @@ const App = () => {
 		<div className="h-screen w-screen flex flex-col items-center justify-center">
 			<BrowserRouter>
 				<Routes>
+					<Route path="/" element={<ChatPage />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/login" element={<Login />} />
 				</Routes>

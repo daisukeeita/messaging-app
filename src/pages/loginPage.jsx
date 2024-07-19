@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import LoginInputComponent from '../components/loginComponents/loginInputComponent.jsx'
+import useLogin from '../hooks/loginHooks/useLogin.js'
+import { useNavigate } from 'react-router-dom'
+import { LoggedUserContext } from '../contexts/LoggedInUser.jsx'
 
 const initialValue = {
 	username: '',
@@ -8,6 +11,9 @@ const initialValue = {
 
 const Login = () => {
 	const [inputValue, setInputValue] = useState(initialValue)
+	const { loading, login } = useLogin()
+	const { setLoggedUser } = useContext(LoggedUserContext)
+	const navigate = useNavigate()
 
 	const handleUserInputs = e => {
 		const { name, value } = e.target
@@ -22,12 +28,18 @@ const Login = () => {
 		setInputValue(initialValue)
 	}
 
+	const navigateTo = data => {
+		if (!data) {
+			throw new Error('There was an error in user login')
+		} else {
+			setLoggedUser(data)
+			navigate('/', { replace: true })
+		}
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
-		console.log({
-			username: inputValue.username,
-			password: inputValue.username
-		})
+		login(inputValue).then(data => navigateTo(data))
 		resetStateValue()
 	}
 
@@ -58,7 +70,13 @@ const Login = () => {
 					/>
 
 					<div className="mt-5">
-						<button className="btn btn-error w-full">Log in</button>
+						<button className="btn btn-error w-full">
+							{loading ? (
+								<span className="loading loading-ring loading-xs"></span>
+							) : (
+								'Log In'
+							)}
+						</button>
 					</div>
 				</form>
 			</div>
