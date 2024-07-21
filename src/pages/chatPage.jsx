@@ -1,14 +1,10 @@
-import { useContext } from 'react'
-import { LoggedUserContext } from '../contexts/LoggedInUser.jsx'
+import FriendsList from '../components/chatPageComponents/sidebarComponents/FriendsListComponent.jsx'
+import LoggedUser from '../components/chatPageComponents/sidebarComponents/LoggedUserComponent.jsx'
 
 const ChatPage = () => {
-	const { loggedUser } = useContext(LoggedUserContext)
-
-	console.log(loggedUser)
-
 	return (
 		<div>
-			<h1>Hello Chat Page</h1>
+			<FriendsList />
 		</div>
 	)
 }
