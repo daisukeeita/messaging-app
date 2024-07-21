@@ -63,4 +63,28 @@ const loginUser = async (req, res) => {
 	}
 }
 
-export { registerUser, loginUser }
+const getAllUser = async (req, res) => {
+	try {
+		const loggedUserId = req.params.id
+
+		const allUsers = await User.find(
+			{ _id: { $ne: loggedUserId } },
+			{
+				_id: 1,
+				fullName: 1,
+				username: 1,
+				profilePic: 1
+			}
+		)
+
+		if (allUsers.length < 1) throw new Error('There are no users available')
+		else res.status(200).json(allUsers)
+	} catch (error) {
+		return res.status(500).json({
+			message: `Error in getting all users or Internal Server Error`,
+			details: error.message
+		})
+	}
+}
+
+export { registerUser, loginUser, getAllUser }

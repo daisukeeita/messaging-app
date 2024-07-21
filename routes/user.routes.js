@@ -2,7 +2,11 @@ import express from 'express'
 
 import { registerUserInput, loginUserInput } from '../middlewares/user.auth.js'
 
-import { registerUser, loginUser } from '../controllers/user.controller.js'
+import {
+	registerUser,
+	loginUser,
+	getAllUser
+} from '../controllers/user.controller.js'
 
 const router = express.Router()
 
@@ -22,5 +26,7 @@ router.post(
 	loginUserInput.checkPasswordMatch,
 	loginUser
 )
+
+router.get('/allUsers/:id', getAllUser)
 
 export default router
