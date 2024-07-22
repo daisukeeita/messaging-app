@@ -1,10 +1,9 @@
-import FriendsList from '../components/chatPageComponents/sidebarComponents/FriendsListComponent.jsx'
-import LoggedUser from '../components/chatPageComponents/sidebarComponents/LoggedUserComponent.jsx'
+import Sidebar from '../components/chatPageComponents/sidebarComponents/SideBar.jsx'
 
 const ChatPage = () => {
 	return (
 		<div>
-			<FriendsList />
+			<Sidebar />
 		</div>
 	)
 }
