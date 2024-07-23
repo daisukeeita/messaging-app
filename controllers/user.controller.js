@@ -63,6 +63,18 @@ const loginUser = async (req, res) => {
 	}
 }
 
+const logoutUser = async (req, res) => {
+	try {
+		res.cookie('token', '', { maxAge: 0 })
+		res.status(200).json({ message: `User logout successfully` })
+	} catch (error) {
+		return res.status(500).json({
+			message: `Error in logging out user or Internal Server Error`,
+			details: error.message
+		})
+	}
+}
+
 const getAllUser = async (req, res) => {
 	try {
 		const loggedUserId = req.params.id
@@ -87,4 +99,4 @@ const getAllUser = async (req, res) => {
 	}
 }
 
-export { registerUser, loginUser, getAllUser }
+export { registerUser, loginUser, logoutUser, getAllUser }

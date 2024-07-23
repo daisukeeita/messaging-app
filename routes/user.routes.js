@@ -5,7 +5,8 @@ import { registerUserInput, loginUserInput } from '../middlewares/user.auth.js'
 import {
 	registerUser,
 	loginUser,
-	getAllUser
+	getAllUser,
+	logoutUser
 } from '../controllers/user.controller.js'
 
 const router = express.Router()
@@ -26,6 +27,8 @@ router.post(
 	loginUserInput.checkPasswordMatch,
 	loginUser
 )
+
+router.post('/logout', logoutUser)
 
 router.get('/allUsers/:id', getAllUser)
 
