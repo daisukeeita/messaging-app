@@ -12,21 +12,26 @@ const FriendsList = () => {
 	}, [])
 
 	return (
-		<div className="flex flex-col items-center w-60 overflow-y-auto overflow-x-hidden h-96">
+		<div className="flex flex-col items-center w-full h-3/4 overflow-y-auto overflow-x-hidden mb-auto">
 			{loading ? (
 				<span className="loading loading-dots loading-sm"></span>
 			) : (
 				allUsers.map(user => (
-					<div className="flex flex-row items-center" key={user._id}>
+					<div
+						className="w-full flex flex-row justify-start pl-5"
+						key={user._id}
+					>
 						<div className="avatar">
-							<div className="w-24 rounded-full">
+							<div className="w-16 rounded-full">
 								<img src={user.profilePic} />
 							</div>
 						</div>
 
 						<div className="flex flex-col">
-							<span className="font-bold text-white">{user.fullName}</span>
-							<span>{user.username}</span>
+							<span className="font-bold text-sm text-white">
+								{user.fullName}
+							</span>
+							<span className="text-white">{user.username}</span>
 						</div>
 					</div>
 				))

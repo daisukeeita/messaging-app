@@ -8,7 +8,7 @@ const LoggedUser = () => {
 	return (
 		<div className="flex flex-row items-center">
 			<div className="avatar">
-				<div className="w-24 rounded-full">
+				<div className="w-16 rounded-full">
 					<img src={loggedUser.profilePic} />
 				</div>
 			</div>

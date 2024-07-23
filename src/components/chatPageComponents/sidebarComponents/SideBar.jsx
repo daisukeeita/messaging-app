@@ -3,7 +3,7 @@ import LoggedUser from './LoggedUserComponent.jsx'
 
 const Sidebar = () => {
 	return (
-		<div>
+		<div className="w-[25%] flex flex-col">
 			<FriendsList />
 			<LoggedUser />
 		</div>
