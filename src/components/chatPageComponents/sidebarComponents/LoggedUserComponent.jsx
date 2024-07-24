@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 
 import { LoggedUserContext } from '../../../contexts/LoggedInUser.jsx'
+import LogoutBtn from './LogoutBtn.jsx'
 
 const LoggedUser = () => {
 	const { loggedUser } = useContext(LoggedUserContext)
@@ -17,6 +18,8 @@ const LoggedUser = () => {
 				<span className="font-bold text-white">{loggedUser.fullName}</span>
 				<span>{loggedUser.username}</span>
 			</div>
+
+			<LogoutBtn />
 		</div>
 	)
 }
